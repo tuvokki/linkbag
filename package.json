@@ -1,0 +1,30 @@
+{
+  "name": "linkbag",
+  "version": "0.0.1",
+  "description": "A linkbag is a bag of links you can use and categorize",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuvokki/linkbag.git"
+  },
+  "keywords": [
+    "link",
+    "links",
+    "simple",
+    "admin"
+  ],
+  "author": "Wouter Roosendaal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuvokki/linkbag/issues"
+  },
+  "homepage": "https://github.com/tuvokki/linkbag",
+  "dependencies": {
+    "express": "^4.10.6",
+    "mongoose": "^3.8.20",
+    "node-restful": "^0.1.17"
+  }
+}
