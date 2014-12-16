@@ -3,7 +3,12 @@ var express = require('express'),
     mongoose = restful.mongoose;
 var app = express();
 
-app.use(express.bodyParser());
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 app.use(express.query());
 
 mongoose.connect("mongodb://localhost/resources");
