@@ -21,4 +21,5 @@ var Resource = app.resource = restful.model('resource', mongoose.Schema({
 
 Resource.register(app, '/resources');
 
-app.listen(3000);
+console.log('Starting server on port 3019 ... ');
+app.listen(3019);
