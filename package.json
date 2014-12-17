@@ -4,6 +4,7 @@
   "description": "A linkbag is a bag of links you can use and categorize",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha"
   },
   "repository": {
