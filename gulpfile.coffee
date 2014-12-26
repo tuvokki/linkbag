@@ -11,21 +11,25 @@ mocha       = require 'gulp-mocha'
 
 # watch task - watches changes in files and runs tasks on changes
 # 
+# todo:
+#   run tests on change of scripts
+#
 # depends on:
 #   scripts
 #   clint
-gulp.task 'watch', ['clint'], ->
-  gulp.watch 'src/**/*.coffee', ['clint', 'scripts']
-  gulp.watch 'test/**/*.coffee', ['clint', 'testscripts']
+gulp.task 'watch', ['clint', 'testscripts', 'scripts'], ->
+  gulp.watch 'src/app/**/*.coffee', ['clint', 'scripts']
+  gulp.watch 'src/test/**/*.coffee', ['clint', 'testscripts']
 
-# coffee lint - checks the produced coffee files
+# coffee lint task - checks the produced coffee files
 gulp.task 'clint', ->
   gulp.src ['./src/**/*.coffee', './test/**/*.coffee']
   .pipe coffeelint()
   .pipe coffeelint.reporter()
 
+# scripts task - compiles the coffee script into javascript
 gulp.task 'scripts', ->
-  gulp.src ['src/**/*.coffee']
+  gulp.src ['src/app/**/*.coffee']
   .pipe plumber()
   .pipe coffee({bare: true})
     .on 'error', (err) ->
@@ -35,8 +39,10 @@ gulp.task 'scripts', ->
   .pipe concat('index.js')
   .pipe gulp.dest 'dist'
 
+# testscripts task - compiles the coffee
+# script tests into javascript and runs them
 gulp.task 'testscripts', ->
-  gulp.src ['test/**/*.coffee']
+  gulp.src ['src/test/**/*.coffee']
   .pipe plumber()
   .pipe coffee({bare: true})
     .on 'error', (err) ->
@@ -47,10 +53,11 @@ gulp.task 'testscripts', ->
   .pipe gulp.dest 'test'
   .pipe mocha {reporter: 'nyan'}
 
-# Remove generated sources
+# clean task - removes generated sources
 gulp.task 'clean', ->
-  del.sync ['dist/**', 'test/test.js']
+  del.sync ['dist/**', 'test/**']
 
+# run task - runs the server on cleaned sources
 gulp.task 'run', ['clean', 'scripts'], ->
   require './dist/index.js', ->
     console.log 'died while starting the server'

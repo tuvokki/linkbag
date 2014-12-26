@@ -28,4 +28,5 @@ node_modules
 .lock-wscript
 
 # generated sources
-dist
+/dist/
+/test/
