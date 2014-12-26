@@ -37,4 +37,3 @@ mongoose.connect "mongodb://localhost/resources", (error) ->
     console.log 'Starting server on port %s ... ', serverPort
     app.listen serverPort
   return
-

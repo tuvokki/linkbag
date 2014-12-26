@@ -13,7 +13,7 @@ del         = require 'del'
 # depends on:
 #   scripts
 #   clint
-gulp.task 'watch', ->
+gulp.task 'watch', ['clint'], ->
   gulp.watch "src/**/*.coffee", ['scripts', 'clint']
 
 # coffee lint - checks the produced coffee files
@@ -26,6 +26,10 @@ gulp.task 'scripts', ->
   gulp.src ['src/**/*.coffee']
   .pipe plumber()
   .pipe coffee({bare: true})
+    .on 'error', (err) ->
+      console.log 'Compile error in ' + err
+      console.log 'Run `gulp watch` to evaluate and compile'
+      process.exit()
   .pipe concat('index.js')
   .pipe gulp.dest 'dist'
 
